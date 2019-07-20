@@ -1,14 +1,29 @@
 import React from "react";
-import Priority from "./Priority";
-import { styled } from "styled-components";
+import PriorityCard from "./PriorityCard";
+import styled from "styled-components";
+
+const PriorityList = styled.ul`
+  list-style: none;
+`;
 
 const PrioritiesPage = () => {
   return (
     <div>
       <h1>Priorities</h1>
-      <ul>
-        <Priority />
-      </ul>
+      <PriorityList>
+        <PriorityCard
+          rank={1}
+          title={"Homelessness"}
+          description={"blah blah blah"}
+        />
+        <PriorityCard
+          rank={2}
+          title={"Graffiti"}
+          description={"blah blah blah"}
+        />
+        <PriorityCard rank={3} title={"Crime"} description={"blah blah blah"} />
+        <PriorityCard rank={4} title={"Trash"} description={"blah blah blah"} />
+      </PriorityList>
     </div>
   );
 };
