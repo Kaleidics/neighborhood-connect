@@ -2,6 +2,7 @@ import React from "react";
 import Post from "./Post";
 import { Link } from "react-router-dom";
 import { seed, seed2 } from "./seed";
+import Header from './Header';
 
 //Test endpoints for GET requests
 const API_PAST = "https://nameless-garden-17654.herokuapp.com";
@@ -78,7 +79,6 @@ export default class PriorityDetails extends React.Component {
     // }
 
     render() {
-
         //Render Conditionally for Past or Current events, not sure if still needed
         let formedData;
         if (this.state.toggle === 1 && this.state.pastData) {
