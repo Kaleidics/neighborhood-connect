@@ -6,7 +6,7 @@ import axios from "axios";
 import edit from "../assets/edit.svg";
 
 const PrioritiesPage = ({ orgId }) => {
-  const [priorities, setPriorities] = useState([]);
+  const [priorities, setPriorities, neighborhood] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -21,7 +21,7 @@ const PrioritiesPage = ({ orgId }) => {
   return (
     <div>
     <Header title={"Priorities"} optionIcon={edit} option={"/addNewEvent"} optionName={"Edit Priorities"}  />
-      <LocationHolder />
+      <LocationHolder hood={neighborhood} />
       <div className="prioritiesPage">
         <ul>
           {priorities.map(priority => (

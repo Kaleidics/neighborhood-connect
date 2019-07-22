@@ -7,11 +7,12 @@ export default class LocationHolder extends React.Component {
         return (
             <div className="locationHolder">
                 <Link to="/selectNeighborhood">
-                <p className="locationHolder__name">
-                    Change Location <img className="locationHolder__image" src={right} alt="arrow" />
-                </p>
+                    <p className="locationHolder__name">
+                        Change Location <img className="locationHolder__image" src={right} alt="arrow" />
+                    </p>
                 </Link>
-                <div className="seperator"></div>
+                <div className="seperator" />
+                <p className="locationHolder__current">{this.props.hood}</p>
             </div>
         );
     }

@@ -15,4 +15,9 @@
         display: inline-block;
         vertical-align: middle;
     }
+
+    &__current {
+        display: inline-block;
+        color: $color-white-1;
+    }
 }
