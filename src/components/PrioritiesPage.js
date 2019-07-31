@@ -9,13 +9,20 @@ import Header from './Header';
 import edit from '../assets/edit.svg';
 import { apiUrl } from '../config';
 
-const PrioritiesPage = ({ orgId, neighborhood }) => {
+const PrioritiesPage = ({ orgId, neighborhood, searchType }) => {
   const [priorities, setPriorities] = useState([]);
-
+  console.log("search type", searchType)
   useEffect(() => {
-    const fetchPosts = async (neighborhood) => {
+    const fetchPosts = async () => {
+      console.log("searchType in fetchPosts", searchType)
+
       const res = await axios.get(
-        `${apiUrl}/priorities/orgs/${orgId}` //need to filter for orgs in locations
+        (searchType === 'neighborhood'
+          ? `${apiUrl}/priorities/orgs/${orgId}`
+          : (searchType === 'district'
+            ? `${apiUrl}/priorities/district/${orgId}`
+            : `${apiUrl}/priorities/type/${orgId}`)
+        )
       );
 
       res.data = [...res.data].sort((a, b) => (a.rank > b.rank ? 1 : -1));
@@ -27,21 +34,27 @@ const PrioritiesPage = ({ orgId, neighborhood }) => {
 
   if (orgId === null) return <Redirect to="/selectNeighborhood" />;
 
-  let prioritiesList = priorities.map( (priority, index) => (
-      <li key={priority.id}>
-          {/* can later make visible with priority.visibility */}
-          <PriorityCard id={priority.id} type={priority.prioritytype} description={priority.description} rank={priority.rank} style={{ animationDelay: `${index / 20}s`}} />
-      </li>
+  let prioritiesList = priorities.map((priority, index) => (
+    <li key={priority.id}>
+      {/* can later make visible with priority.visibility */}
+      <PriorityCard id={priority.id} type={priority.prioritytype} description={priority.description} rank={priority.rank} style={{ animationDelay: `${index / 20}s` }} />
+    </li>
   ));
+
+  const header = searchType === 'neighborhood' ? (
+    <Header
+      title={'Priorities'}
+      optionIcon={edit}
+      option={'/editPriorities'}
+      optionName={'Edit Priorities'}
+    />
+  ) : (
+      <Header title={'Priorities'} />
+    )
 
   return (
     <div>
-      <Header
-        title={'Priorities'}
-        optionIcon={edit}
-        option={'/editPriorities'}
-        optionName={'Edit Priorities'}
-      />
+      {header}
       <LocationHolder hood={neighborhood} />
       <div className="prioritiesPage">
         <ul>
