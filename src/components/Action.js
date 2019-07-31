@@ -10,21 +10,21 @@ export default class Action extends React.Component {
         const formattedDate = new Date(date).toDateString();
 
         return (
-            <div className="action">
+            <div className="action" style={this.props.style}>
                 <ul className="action__list">
                     <li className="action__item" id={id}>
                         <span className="action__image">
                             <img src={avatar} alt="avatar needed from db" />
                         </span>
                         <span className="action__org">
-                            <h3 className="action__name">{title}</h3>
+                            <span className="action__details">
+                                <h3 className="action__name">{title}</h3>
+                                <p className="action__date">{formattedDate}</p>
+                            </span>
                             <p className="action__location">
                                 <img className="u-margin-right-smallest" src={neighborhood} alt="location" />
                                 {location || "need location from db"}
                             </p>
-                        </span>
-                        <span className="action__absolute">
-                            <p className="action__date">{formattedDate}</p>
                         </span>
                     </li>
                     <li className="action__item">
